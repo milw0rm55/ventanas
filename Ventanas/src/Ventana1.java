@@ -27,6 +27,8 @@ import java.awt.event.ItemEvent;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class Ventana1 extends JFrame{
 	private JLabel lblNombre;
@@ -133,11 +135,15 @@ public class Ventana1 extends JFrame{
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent arg0) {
-				System.out.println(arg0.getKeyChar());
+			public void keyTyped(KeyEvent e) {
+				System.out.println(e.getKeyChar());
+				e.setKeyChar('*');
 			}
 		});
 		textField.setColumns(10);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0, 0, 100, 2));
 	
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -153,16 +159,21 @@ public class Ventana1 extends JFrame{
 							.addGap(57)
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(rdbtnMale)
-							.addGap(18)
-							.addComponent(rdbtnFemale))
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(chckbxPregunta)))
-					.addGap(68))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(rdbtnMale)
+									.addGap(18)
+									.addComponent(rdbtnFemale))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(chckbxPregunta)))
+							.addGap(68))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(115))))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap(472, Short.MAX_VALUE)
 					.addComponent(btnAceptar)
@@ -186,7 +197,9 @@ public class Ventana1 extends JFrame{
 								.addComponent(rdbtnFemale)
 								.addComponent(rdbtnMale))
 							.addGap(53)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(23)
+							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGap(23)
 					.addComponent(btnAceptar))
 		);
